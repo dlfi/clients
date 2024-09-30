@@ -35,7 +35,7 @@ defaults:
 jobs:
   electron-verify:
     name: Verify Electron Version
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -54,7 +54,7 @@ jobs:
 
   setup:
     name: Setup
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       package_version: ${{ steps.retrieve-version.outputs.package_version }}
       release_channel: ${{ steps.release-channel.outputs.channel }}
@@ -129,7 +129,7 @@ jobs:
     # The snap base for desktop is defined in `apps/desktop/electron-builder.json`
     # We are currently running on 20.04 until the Ubuntu 24.04 release is available, as moving
     # to 22.04 now breaks users who are on 20.04 due to mismatched GLIBC versions.
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs: setup
     env:
       _PACKAGE_VERSION: ${{ needs.setup.outputs.package_version }}
@@ -1267,7 +1267,7 @@ jobs:
       - windows
       - macos-package-github
       - macos-package-mas
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -1300,7 +1300,7 @@ jobs:
   check-failures:
     name: Check for failures
     if: always()
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - electron-verify
       - browser-build
