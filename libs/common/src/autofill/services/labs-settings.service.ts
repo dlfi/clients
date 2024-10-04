@@ -74,6 +74,9 @@ export class LabsSettingsService implements LabsSettingsServiceAbstraction {
   }
 
   async init() {
+    // if (!await firstValueFrom(this.improvedFieldQualificationForInlineMenuEnabled$)) {
+    //   const featureFlagInlineMenuFieldQualification = await this.configService.getFeatureFlag(FeatureFlag.InlineMenuFieldQualification);
+    // }
   }
 
   async setLabsSettingsEnabled(newValue: boolean): Promise<void> {

@@ -67,6 +67,10 @@ import {
   DefaultDomainSettingsService,
 } from "@bitwarden/common/autofill/services/domain-settings.service";
 import {
+  LabsSettingsService,
+  LabsSettingsServiceAbstraction,
+} from "@bitwarden/common/autofill/services/labs-settings.service";
+import {
   UserNotificationSettingsService,
   UserNotificationSettingsServiceAbstraction,
 } from "@bitwarden/common/autofill/services/user-notification-settings.service";
@@ -364,6 +368,7 @@ export default class MainBackground {
   syncServiceListener: SyncServiceListener;
   themeStateService: DefaultThemeStateService;
   autoSubmitLoginBackground: AutoSubmitLoginBackground;
+  labsSettingsService: LabsSettingsServiceAbstraction;
 
   onUpdatedRan: boolean;
   onReplacedRan: boolean;
@@ -704,6 +709,7 @@ export default class MainBackground {
       this.stateProvider,
       this.policyService,
     );
+    this.labsSettingsService = new LabsSettingsService(this.stateProvider, this.configService);
     this.badgeSettingsService = new BadgeSettingsService(this.stateProvider);
     this.policyApiService = new PolicyApiService(this.policyService, this.apiService);
     this.keyConnectorService = new KeyConnectorService(
@@ -1095,6 +1101,7 @@ export default class MainBackground {
       this.runtimeBackground = new RuntimeBackground(
         this,
         this.autofillService,
+        this.labsSettingsService,
         this.platformUtilsService as BrowserPlatformUtilsService,
         this.notificationsService,
         this.autofillSettingsService,
